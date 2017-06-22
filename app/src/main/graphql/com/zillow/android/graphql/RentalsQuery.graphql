@@ -1,0 +1,43 @@
+query RentalsQuery($query: String!, $limit: Int!, $page: Int!, $featured_count: Int!) {
+  rental_search(query: $query, per_page: $limit, page: $page) {
+    total_count
+
+    page_info {
+      has_next_page
+      total_pages
+      out_of_range
+    }
+
+    related_areas
+    
+    listings {
+      id
+      status
+      bedrooms
+      bathrooms
+      price
+      featured
+      address {
+        street
+        unit
+        city
+        state
+        zip
+      }
+      contacts {
+        id
+        name
+        phone
+      }
+    }
+    
+    featured(max: $featured_count) {
+      bedrooms
+      price
+      address {
+        unit
+        city   
+      }
+    }
+  }
+}
